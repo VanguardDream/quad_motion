@@ -1,3 +1,5 @@
+#include "quad_opencr/quad_stat.h"      //quad_stat msg defined in this header.
+
 //Define mode here
 #define MODE_1 1        //motion called inch worm motion.
 #define MODE_2 2        //motion called vertical wave motion.
