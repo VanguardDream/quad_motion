@@ -19,6 +19,8 @@ ros::NodeHandle _nh;
 ros::Subscriber<quad_opencr::quad_stat> sub("quad_motion", &motionCallback);
 
 unsigned long boot_t;
+unsigned long loop_t[10] = {0,};
+
 void setup()
 {
     boot_t = millis();    
@@ -33,15 +35,23 @@ void setup()
 
 void loop()
 {
-    unsigned long loop_t = millis();
+    boot_t = millis();
 
-    if((loop_t - boot_t) > 500)
+    if((boot_t - loop_t[0]) > LOOP_TIME_1)
     {
+        loop_t[0] = boot_t;
+
         led_status = !led_status;
         ledSwith(OPENCR_PIN_USER_LED_4,led_status);
 
         msg_imu = sensors.getIMU();
         _nh.advertise(imu_pub);
+    }
+
+    if((boot_t - loop_t[1]) > LOOP_TIME_1)
+    {
+        loop_t[1] = boot_t;
+        sensors.updateIMU();
     }
 
     _nh.spinOnce();

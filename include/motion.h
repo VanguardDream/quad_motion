@@ -14,11 +14,12 @@
 #define OPENCR_PIN_USER_LED_4 25
 #define OPENCR_PIN_ARDUINO_LED_1 13
 
+#define LOOP_TIME_0 500
+#define LOOP_TIME_1 50
+
 //Global variable for code here.
 bool led_test = false;
 bool led_status = false;
-
-int loop_time = 500;        //500ms
 
 
 //ROS msg structure
